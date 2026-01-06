@@ -9,11 +9,7 @@ DBCON();
 
 const PORT = process.env.PORT;
 const app = express();
-app.use(cors({
-    origin:"http://localhost:8000",
-    methods:["GET","POST","DELETE","PATCH"],
-    allowedHeaders:["Content-Type"]
-}
+app.use(cors(
 ));
 app.use(express.json());
 app.use("/books",Books);

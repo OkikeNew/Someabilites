@@ -38,14 +38,16 @@ const GetBook = async (req, res) => {
 const SpecialGet = async (req, res) => {
   try {
     const { id } = req.params;
-    const books = await Book.findById(id);
-    return res.status(200).json({
-      success: true,
-      message: "GETBOOK UPDATE Geldi",
-      books,
-    });
+    const book = await Book.findById(id);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    res.status(200).json(book);
   } catch (error) {
     console.log("GETBOOK HATASI", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
